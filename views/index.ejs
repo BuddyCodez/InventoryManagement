@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.46.0/dist/full.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+ <link rel="stylesheet" href="/stylesheets/style.css">
+
+  <title>Inventory Management</title>
+</head>
+
+<body class="dark:bg-base-900 flex items-center justify-center ">
+  <% if(!session.user) { %>
+    <form action="/login" method="post">
+      <div class="hero min-h-screen bg-base-200" style="width: 100vw;">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+          <div class="text-center lg:text-left">
+            <h1 class="text-5xl font-bold">Login now!</h1>
+            <p class="py-6">Login to our Inventory Management. we have good anylatics of your inventory</p>
+          </div>
+          <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div class="card-body">
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Email</span>
+                </label>
+                <input type="text" placeholder="email" name="user_email_address" class="input input-bordered input-info" />
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Password</span>
+                </label>
+                <input type="password" placeholder="password"  name="user_password" class="input input-bordered  input-info" />
+                <label class="label">
+                  <span class="label-text-alt ">Dont have account? <a href="/register"
+                      class="text-info">Register</a></span>
+                </label>
+              </div>
+              <div class="form-control mt-6">
+                <button class="btn btn-info">Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+
+      <% } else { %>
+        <div class="app bg-base-300" style="width: 100vw; height: 100vh;">
+          <%- include('partials/header') %>
+            <div class="w-100 h-screen" id="app">
+          <div class="hero min-h-screen">
+            <div class="hero-overlay bg-opacity-60"></div>
+            <div class="hero-content text-center text-neutral-content">
+              <div class="max-w-lg">
+                <h1 class="mb-5 text-4xl font-extrabold text-info ">Welcome to Inventory Management</h1>
+                <p class="mb-5">Use Navigation Menu to start using out inventory management system.</p>
+              </div>
+            </div>
+          </div>
+            </div>
+         
+                <%- include('partials/addproduct') %>
+                <div id="products" class="hidden justify-center flex-wrap z-50 bg-base-300" >
+
+                </div>
+        </div>
+        <% } %>
+    </div>
+    </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/javascripts/index.js" type="text/javascript"></script>
+</body>
+
+</html>

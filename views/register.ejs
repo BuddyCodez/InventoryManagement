@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.46.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+
+        }
+    </style>
+    <title>Inventory Management</title>
+</head>
+
+<body class="dark:bg-base-900 flex items-center justify-center ">
+
+    <div class="p-10 rounded-lg bg-base-300">
+        <h1 class="mt-5 mb-5 text-center text-primary text-4xl"><b>Inventory Management</b></h1>
+
+        <div class="flex mt-5 justify-center flex-col items-center">
+            <div class="col-md-6">
+                <div class="flex flex-col justify-center items-center">
+                    <div class="text-2xl">Register To Continue</div>
+                    <div class="card-body">
+                        <form method="post" action="/register">
+                            <div class="mb-3 flex flex-col">
+                                <label>Email Address</label>
+                                <input type="email" name="user_email_address" class="input input-bordered" />
+                            </div>
+                            <div class="mb-3 flex flex-col">
+                                <label>Password</label>
+                                <input type="password" name="user_password" class="input input-bordered" />
+                            </div>
+                            <div class="mb-3 flex flex-col">
+                                <label>Name</label>
+                                <input type="text" name="user_name" class="input input-bordered" />
+                            </div>
+                            <div class="mb-3 flex flex-col">
+                                <label>Company Name</label>
+                                <input type="text" name="user_cmp" class="input input-bordered" />
+                            </div>
+                            <div class="mb-3 flex flex-col">
+                                <label>Phone Number</label>
+                                <input type="number" name="user_phone" class="input input-bordered"
+                                    maxlength="1000000000" />
+                            </div>
+                            <div class="mb-3 flex flex-col">
+                                <label>Address</label>
+                                <input type="text" name="user_address" class="input input-bordered" />
+                            </div>
+                         
+                            <div class="mb-3 flex justify-center ">
+                                <input type="submit" class="btn btn-primary text-xl" value="Register" />
+                            </div>
+                          
+
+                            <div class="mb-3 flex gap-1">
+                                <p>Already have an account ?</p>
+                                <a href="/" class=" text-primary ">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>

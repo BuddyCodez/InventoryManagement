@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hammersmith+One&family=Josefin+Sans:wght@500&family=Open+Sans:wght@700&family=Oswald:wght@600&family=PT+Sans&family=Poppins:wght@500&display=swap");
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+ul {
+  z-index: 50;
+}
+#products {
+  margin-top: 5vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  z-index: 1;
+}
+#products .product {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+@media (max-width: 900px) {
+  .navbar .flex-1 {
+    display: none;
+  }
+  #products {
+    margin-top: 15vw;
+  }
+}
