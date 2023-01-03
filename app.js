@@ -24,7 +24,7 @@ app.use(
 app.use(
   fileUpload({
     useTempFiles: true,
-    tempFileDir: path.join(__dirname, "public/images"),
+    tempFileDir: path.join(__dirname, "public/images/"),
   })
 );
 app.use(logger("dev"));
