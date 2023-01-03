@@ -9,7 +9,7 @@ const app = express();
 const ApiLogin = require("./routes/api/login");
 const ApiRegister = require("./routes/api/register");
 const addproduct = require("./routes/api/addproduct");
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
 const prodcuts = require("./routes/api/products");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -27,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/tmp", express.static("/tmp"));
 
 app.use("/", indexRouter);
 app.use("/logout", usersRouter);

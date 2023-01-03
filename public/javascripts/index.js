@@ -49,7 +49,7 @@ function showProducts() {
           div.className = "product";
           div.innerHTML = `
              <div class="card card-compact w-96 bg-base-100 shadow-xl" >
-  <figure><img src="/images/${product.product_image}" alt="Shoes" /></figure>
+  <figure><img src="/tmp/${product.product_image}" alt="Shoes" /></figure>
   <div class="card-body">
     <h2 class="card-title text-4xl text-extrabold">${product.product_name}</h2>
     <p>${product.product_description}</p>
