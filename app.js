@@ -9,7 +9,7 @@ const app = express();
 const ApiLogin = require("./routes/api/login");
 const ApiRegister = require("./routes/api/register");
 const addproduct = require("./routes/api/addproduct");
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
 const prodcuts = require("./routes/api/products");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -21,8 +21,9 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(fileUpload( {useTempFiles: true,
-    tempFileDir: path.join("/tmp"),}));
+app.use(
+  fileUpload({ useTempFiles: true, tempFileDir: path.join(__dirname, "tmp") })
+);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
