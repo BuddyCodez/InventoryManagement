@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
       "This format is not allowed , please upload file with '.png','.gif','.jpg'"
     );
   }
-  file.mv("public/images/" + file.name, function (err) {
+  file.mv("/public/images/" + file.name, function (err) {
     if (err) return res.status(500).send(err);
 
     const query = `INSERT INTO products (product_name, product_price,product_quantity, product_description, product_image) VALUES (
