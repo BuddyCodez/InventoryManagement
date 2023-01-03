@@ -21,12 +21,8 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: path.join(__dirname, "public/images/"),
-  })
-);
+app.use(fileUpload( {useTempFiles: true,
+    tempFileDir: path.join(__dirname, "/tmp/"),}));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
