@@ -39,10 +39,7 @@ router.post("/", (req, res) => {
         });
       } else {
           res.status(200).send("Product saved successfully");
-        // res.status(200).json({
-        //   message: "Product saved successfully",
-        //   data: result,
-        // });
+
       }
     });
   });
