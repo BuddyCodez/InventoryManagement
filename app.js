@@ -22,7 +22,7 @@ app.use(
   })
 );
 app.use(
-  fileUpload({ useTempFiles: true, tempFileDir: path.join(__dirname, "tmp") })
+  fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" })
 );
 app.use(logger("dev"));
 app.use(express.json());
