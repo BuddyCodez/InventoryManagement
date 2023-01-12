@@ -13,10 +13,10 @@ router.post("/", function (request, response, next) {
 
     database.query(query, function (error, data) {
       const user = data.filter((user) => { return user.user_email == user_email_address && user.user_password == user_password });
-      console.log(user);
       if (user.length > 0) {
         request.session.loggedin = true;
         request.session.user_email = user_email_address;
+        request.session.user_name = user[0].user_name;
         request.session.user = user[0];
         response.redirect("/");
         response.end();

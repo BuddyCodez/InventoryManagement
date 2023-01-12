@@ -1,0 +1,117 @@
+<html>
+
+<head>
+    <title>
+        Remove Product
+    </title>
+    <% include partials/header %>
+
+</head>
+
+<body>
+    <div id="app">
+        <div class="productMangment flex justify-center" id="addproduct">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-info text-4xl font-bold text-center mb-4">Manage Products</h3>
+                            </div>
+                            <div class="overflow-x-auto w-full">
+                                <table class="table w-full">
+                                    <!-- head -->
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <label>
+                                                    <input type="checkbox" checked class="checkbox checkbox-primary"
+                                                        onclick="checkall();" />
+
+                                                </label>
+                                            </th>
+                                            <th>Product Name</th>
+                                            <th>Product Quantity</th>
+                                            <th>Product Price</th>
+                                            <th id="all" class="hidden transition-all"> <a href="/removeproduct/all/delete"
+                                                    class="btn btn-primary">Delete All</a></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="mybody">
+
+                                    </tbody>
+                                    <!-- foot -->
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            const main = document.querySelector('#mybody');
+            const url = '/products';
+            fetch(url)
+                .then((res) => res.json())
+                .then((d) => {
+                    const data = d.data;
+                    if (data.length == 0) {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                        <td colspan="5" class="text-center">No Products</td>
+                        `;
+                        main.appendChild(tr);
+                    }
+                    console.log(data);
+                    data.forEach((product) => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                        <td>
+                            <label>
+                                <input type="checkbox" class="checkbox checkbox-primary" id="${product.product_name}" onclick="clickedOnBtn('${product.product_name}');" />
+                            </label>
+                        </td>
+                       <div class="flex items-center space-x-3" style='padding: 10px;'>
+            <div class="avatar">
+              <div class="w-12 h-12">
+                <img src='/images/${product.product_image}' alt='${product.product_name}'/>
+              </div>
+            </div>
+            <div>
+              <div class="font-bold">${product.product_name}</div>
+            </div>
+          </div>
+                        <td>${product.product_quantity}</td>
+                        <td>${product.product_price}</td>
+                        <td>
+                            <a href="/removeproduct/${product.id}/edit" class="btn btn-primary hidden" id="${product.product_name}/edit">Edit</a>
+                            <a href="/removeproduct/${product.id}/delete" id="${product.product_name}/delete" class="btn btn-danger hidden">Delete</a>
+                        </td>
+                        `;
+                        main.appendChild(tr);
+                    });
+                });
+        })
+        function clickedOnBtn(product_name){
+            document.getElementById(`${product_name}/edit`).classList.toggle('hidden');
+            document.getElementById(`${product_name}/delete`).classList.toggle('hidden');
+        }
+        function checkall() {
+            const all = document.querySelector('#all');
+            const checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach((checkbox) => {
+                if (all.classList.contains('hidden')) checkbox.checked = false;
+
+                checkbox.checked = !checkbox.checked;
+            });
+            all.classList.toggle('hidden');
+
+        }
+    </script>
+</body>
+
+</html>

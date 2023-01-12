@@ -2,7 +2,7 @@ const router = require("express").Router();
 const database = require("../../database");
 router.get("/", (req, res) => {
 
-    const query = `SELECT * FROM products`;
+    const query = `SELECT * FROM products WHERE user_name = "${req.session.user_name}"`;
     database.query(query, (error, result) => {
         console.log(error);
         if (error) {

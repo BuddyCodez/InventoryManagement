@@ -7,9 +7,12 @@ body {
 ul {
   z-index: 50;
 }
+
 #products {
   margin-top: 5vw;
   position: absolute;
+  column-gap: 3rem;
+  row-gap: 2rem;
   top: 0;
   left: 0;
   width: 100vw;
