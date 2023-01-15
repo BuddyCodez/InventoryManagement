@@ -9,14 +9,8 @@ ul {
 }
 
 #products {
-  margin-top: 5vw;
-  position: absolute;
   column-gap: 3rem;
   row-gap: 2rem;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
   padding: 20px;
   z-index: 1;
 }
@@ -24,11 +18,39 @@ ul {
   margin-right: 10px;
   margin-left: 10px;
 }
+#products .product .card {
+  text-align: center;
+  transition: 0.3s;
+  scale: 1;
+  min-height: 400px;
+}
+#products .product .card:hover {
+  scale: 0.9;
+}
+#products .product img {
+  object-fit: cover;
+  border-radius: 10px;
+}
+#products .product .product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px;
+}
+#products .product .card {
+  width: 27vw;
+  padding: 25px;
+}
+
 @media (max-width: 900px) {
   .navbar .flex-1 {
     display: none;
   }
   #products {
     margin-top: 15vw;
+  }
+  #products .product .card {
+    width: 70vw;
   }
 }
