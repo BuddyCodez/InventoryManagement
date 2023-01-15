@@ -54,7 +54,7 @@
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             const main = document.querySelector('#mybody');
-            const url = '/products';
+            const url = '/products/all';
             fetch(url)
                 .then((res) => res.json())
                 .then((d) => {
@@ -88,7 +88,7 @@
                         <td>${product.product_quantity}</td>
                         <td>${product.product_price}</td>
                         <td>
-                            <a href="/removeproduct/${product.id}/edit" class="btn btn-primary hidden" id="${product.product_name}/edit">Edit</a>
+                            <a href="edit/${product.id}" class="btn btn-primary hidden" id="${product.product_name}/edit">Edit</a>
                             <a href="/removeproduct/${product.id}/delete" id="${product.product_name}/delete" class="btn btn-danger hidden">Delete</a>
                         </td>
                         `;

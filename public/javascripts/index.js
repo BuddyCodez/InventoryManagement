@@ -2,7 +2,7 @@ function showProducts() {
   const Div = document.getElementById("products");
   Div.style.display = "flex";
   let isduplicate = false;
-  fetch("/products").then((res) => {
+  fetch("/products/all").then((res) => {
     res.json().then((data) => {
       console.log(data);
       const products = data.data;

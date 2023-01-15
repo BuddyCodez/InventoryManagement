@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const database = require("../database");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render("index", { title: "Express", session: req.session });
@@ -20,7 +20,10 @@ router.get('/showproducts', function (req, res, next) {
 router.get('/manage', function (req, res, next) {
   res.render("removeproducts", { session: req.session  });
 });
-router.get('/edit', function (req, res, next) {
-  res.render("editproduct", { session: req.session });
+router.get('/edit/:id', function (req, res, next) {
+  const id = req.params.id;
+  if (!id) res.redirect("/manage");
+  res.render("editproduct", { session: req.session, id: id});
 });
+
 module.exports = router;

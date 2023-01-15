@@ -10,6 +10,7 @@ const ApiLogin = require("./routes/api/login");
 const ApiRegister = require("./routes/api/register");
 const addproduct = require("./routes/api/addproduct");
 const removeproduct = require("./routes/api/removeproduct");
+const editproduct = require("./routes/api/editproduct");
 // const fileUpload = require("express-fileupload");
 const multer = require("multer");
 const bodyparser = require("body-parser");
@@ -41,10 +42,7 @@ var storage = multer.diskStorage({
   },
   filename: (req, file, callBack) => {
     console.log(file);
-    callBack(
-      null,
-      file.originalname
-    ); // file.originalname is the name of the file that is uploaded
+    callBack(null, file.originalname); // file.originalname is the name of the file that is uploaded
   },
 });
 
@@ -63,6 +61,7 @@ app.use("/", indexRouter);
 app.use("/logout", usersRouter);
 app.use("/login", ApiLogin);
 app.use("/register", ApiRegister);
+app.use("/edit", upload.single("product_image"), editproduct);
 app.use("/addproduct", upload.single("product_image"), addproduct);
 app.use("/products", prodcuts);
 app.use("/removeproduct", removeproduct);

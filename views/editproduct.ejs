@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <title>
+        Edit Product
+    </title>
+    <% include partials/header %>
+</head>
+
+<body>
+    <div id="app">
+        <div class="productMangment flex justify-center" id="addproduct">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-info text-4xl font-bold text-center">Edit Products</h3>
+                            </div>
+                            <div class="card-body">
+                                <form method="post"  enctype="multipart/form-data" id="editform">
+                                    <div class="mb-3 flex flex-col">
+                                        <label>Product Name</label>
+                                        <input type="text" name="product_name" placeholder="Enter Name of product"
+                                            class="input input-bordered" required />
+                                    </div>
+                                    <div class="mb-3 flex flex-col">
+                                        <label>Product Price</label>
+                                        <input type="number" name="product_price" placeholder="Enter Price of product"
+                                            class="input input-bordered" min="0" required />
+                                    </div>
+                                    <div class="mb-3 flex flex-col">
+                                        <label>Product Quantity</label>
+                                        <input type="number" name="product_quantity"
+                                            placeholder="Enter Quantity of product" class="input input-bordered" min="0"
+                                            required />
+                                    </div>
+                                    <div class="mb-3 flex flex-col">
+                                        <label>Product Description</label>
+                                        <input type="text" name="product_description"
+                                            placeholder="Enter Description of product" class="input input-bordered"
+                                            required />
+                                    </div>
+                                    <div class="mb-3 flex flex-col">
+                                        <label>Product Image</label>
+                                        <input type="file"
+                                            class="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                                            accept="" name="product_image" />
+                                    </div>
+                                    <div class="mb-3 flex justify-center ">
+                                        <a class="btn btn-info text-black" value="Update Product"
+                                            onclick="UpdateProduct()">Update Product</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function UpdateProduct() {
+            const id = window.location.pathname.split('/')[2];
+            const product_name = document.querySelector('input[name="product_name"]').value;
+            const product_price = document.querySelector('input[name="product_price"]').value;
+            const product_quantity = document.querySelector('input[name="product_quantity"]').value;
+            const product_description = document.querySelector('input[name="product_description"]').value;
+            const product_image = document.querySelector('input[name="product_image"]');
+            var data = new FormData();
+            data.append('product_name', product_name);
+            data.append('product_price', product_price);
+            data.append('product_quantity', product_quantity);
+            data.append('product_description', product_description);
+            data.append('product_image', product_image.files[0] || 'NULL');
+
+            console.log(data.get('product_name'))
+
+            fetch('/edit/' + id + '/edit',
+                {
+                    method: 'POST',
+                   
+                    body: data
+                })
+                .then((res) => res.json())
+                .then((d) => {
+                    if (d.status == 200) {
+                        window.alert(d.message)
+                    }
+                })
+        }
+        window.addEventListener('load', async () => {
+            const id = window.location.pathname.split('/')[2];
+            fetch('/products/' + id)
+                .then((res) => res.json())
+                .then((d) => {
+                    const data = d.data[0];
+                    console.log(data)
+                    document.querySelector('input[name="product_name"]').value = data.product_name;
+                    document.querySelector('input[name="product_price"]').value = data.product_price;
+                    document.querySelector('input[name="product_quantity"]').value = data.product_quantity;
+                    document.querySelector('input[name="product_description"]').value = data.product_description;
+
+
+                })
+
+        })
+    </script>
+</body>
+
+</html>
