@@ -51,6 +51,7 @@ ul {
     margin-top: 15vw;
   }
   #products .product .card {
-    width: 70vw;
+    font-size: small;
+    width: 90vw;
   }
 }
