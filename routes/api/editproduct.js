@@ -40,6 +40,7 @@ WHERE id = ${product_id}`;
     } else {
       res.status(200).json({
         message: "Product Updated successfully",
+        status: 200,
       });
     }
   });

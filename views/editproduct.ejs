@@ -9,6 +9,15 @@
 
 <body>
     <div id="app">
+        <div
+            class="hidden shadow-md gap-6 rounded-lg overflow-hidden divide-x max-w-2xl dark:bg-gray-900 dark:text-gray-100 divide-gray-700 ALERT transition-all" id="ALERT">
+            <div class="flex flex-1 flex-col p-4 border-l-8" style="border-color: hsl(var(--in)); border-radius: 8px;">
+                <span class="text-2xl font-bolder" id="text">Success Update</span>
+                <span class="text-xs dark:text-gray-400">Product Updated Successfully. Click on Dismiss to close this message.</span>
+            </div>
+            <button
+                class="px-4 flex items-center text-xs uppercase tracking-wide dark:text-gray-400 dark:border-gray-700 hover:text-error" onclick="Close();">Dismiss</button>
+        </div>
         <div class="productMangment flex justify-center" id="addproduct">
             <div class="container">
                 <div class="row">
@@ -18,7 +27,7 @@
                                 <h3 class="text-info text-4xl font-bold text-center">Edit Products</h3>
                             </div>
                             <div class="card-body">
-                                <form method="post"  enctype="multipart/form-data" id="editform">
+                                <form method="post" enctype="multipart/form-data" id="editform">
                                     <div class="mb-3 flex flex-col">
                                         <label>Product Name</label>
                                         <input type="text" name="product_name" placeholder="Enter Name of product"
@@ -60,7 +69,12 @@
         </div>
     </div>
     <script>
+        function Close(){
+            document.querySelector('#ALERT').classList.add('hidden')
+            document.querySelector('#ALERT').classList.remove('flex')
+        }
         function UpdateProduct() {
+            
             const id = window.location.pathname.split('/')[2];
             const product_name = document.querySelector('input[name="product_name"]').value;
             const product_price = document.querySelector('input[name="product_price"]').value;
@@ -79,13 +93,21 @@
             fetch('/edit/' + id + '/edit',
                 {
                     method: 'POST',
-                   
+
                     body: data
                 })
                 .then((res) => res.json())
                 .then((d) => {
-                    if (d.status == 200) {
-                        window.alert(d.message)
+                    if(d.status == 200){
+                        document.querySelector('#ALERT').classList.remove('hidden')
+                        document.querySelector('#ALERT').classList.add('flex')
+                        document.querySelector('#text').innerText = d.message
+                        document.querySelector('#text').classList.add('text-success')
+                    } else {
+                        document.querySelector('#ALERT').classList.remove('hidden')
+                        document.querySelector('#ALERT').classList.add('flex')
+                        document.querySelector('#text').innerText = d.message
+                        document.querySelector('#text').classList.add('text-error')
                     }
                 })
         }

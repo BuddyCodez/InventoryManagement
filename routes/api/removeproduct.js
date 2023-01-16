@@ -19,10 +19,9 @@ router.get("/:id/delete", (req, res) => {
         error: error,
       });
     } else {
-      res.redirect("/");
+      res.redirect("/manage");
     }
   });
 });
-
 
 module.exports = router;

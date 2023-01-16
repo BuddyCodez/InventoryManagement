@@ -25,7 +25,7 @@ ul {
   min-height: 400px;
 }
 #products .product .card:hover {
-  scale: 0.9;
+  scale: 0.95;
 }
 #products .product img {
   object-fit: cover;
@@ -42,8 +42,18 @@ ul {
   width: 27vw;
   padding: 25px;
 }
+.ALERT {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 5;
+}
 
 @media (max-width: 900px) {
+  .ALERT {
+    width: 90vw;
+  }
   .navbar .flex-1 {
     display: none;
   }

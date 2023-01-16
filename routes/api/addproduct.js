@@ -48,7 +48,7 @@ router.post("/", (req, res) => {
         error: error,
       });
     } else {
-      res.redirect("/");
+      res.redirect("/addproduct");
     }
   });
 });

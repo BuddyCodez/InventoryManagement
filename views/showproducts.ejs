@@ -10,14 +10,20 @@
 <body style="height: auto; background: #1f242d;">
     <div id="app" style="height: 100vh; max-height: 500vh;  width: 100vw;
   height: 100vh; background: #1f242d;">
+        <div id="loader" class="flex justify-center items-center gap-2" style="width: 100%; height: 100%;">
+            <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-info" style="border-color: hsl(var(--in));" ></div>
+            <span class="text-xl font-bold text-info"> Loading Products ...</span>
+        </div>
         <div id="products" class="hidden justify-center flex-wrap z-50 bg-base-300">
-
         </div>
     </div>
     <script src="/javascripts/index.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', function () {
-            showProducts();
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                showProducts();
+            }, 5000);
         })
     </script>
 </body>
