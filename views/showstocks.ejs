@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>
+        Show Stock
+    </title>
+    <% include partials/header %>
+</head>
+
+<body style="height: auto; background: #1f242d;">
+    <div id="app" style="height: 100vh; max-height: 500vh;  width: 100vw;
+  height: 100vh; background: #1f242d;">
+        <div id="loader" class="flex justify-center items-center gap-2" style="width: 100%; height: 100%;">
+            <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-info"
+                style="border-color: hsl(var(--in));"></div>
+            <span class="text-xl font-bold text-info"> Loading Stock ...</span>
+        </div>
+        <div id="stocks" class="hidden justify-center flex-wrap z-50 bg-base-300">
+        </div>
+    </div>
+    <script src="/javascripts/index.js"></script>
+    <script>
+        function showStocks() {
+            const colors = ['text-accent', 'text-warning', 'text-error', 'text-info']
+
+            fetch('/products/all').then(res => res.json()).then(res => {
+
+                const data = res.data;
+                console.log(data);
+                let stocks = document.getElementById('stocks');
+                data.forEach(product => {
+                    const percent = (product.stock / product.product_quantity) * 100;
+                    let classToAdd = '';
+                    if(percent < 20) classToAdd = colors[2];
+                    else if(percent < 50) classToAdd = colors[1];
+                    else if(percent < 80) classToAdd = colors[0];
+                    else classToAdd = colors[3];
+                    const div = this.document.createElement("div");
+
+                    console.log(product.product_image);
+                    div.className = "stock";
+                    div.innerHTML = `
+             <div class="card card-compact w-96 bg-base-100 shadow-xl" >
+  <div class="card-body">
+    <h2 class="card-title text-4xl text-extrabold">${product.product_name}</h2>
+    <p class='test-xl ${classToAdd} font-bold'>${product.stock} out of ${product.product_quantity} In Stock</p>
+
+  </div>
+</div>
+          `;
+                    stocks.appendChild(div);
+                    stocks.style.display = "flex";
+                    stocks.classList.add('p-3')
+
+                })
+            })
+
+
+        }
+        window.addEventListener('DOMContentLoaded', function () {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                showStocks();
+            }, 5000);
+        })
+    </script>
+</body>
+
+</html>

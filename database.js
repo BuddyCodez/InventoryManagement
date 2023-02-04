@@ -9,21 +9,16 @@ const connection = mysql.createConnection(
 //   product_name VARCHAR(255) NOT NULL,
 //   product_price INT NOT NULL,
 //   product_quantity INT NOT NULL,
+//   stock INT NOT NULL,
 //   product_description TEXT(400) NOT NULL,
 //   product_image TEXT(200) DEFAULT NULL,
 //   user_name VARCHAR(255) NOT NULL,
 //   PRIMARY KEY (id)
 // );`;
 // const deleteq = `DROP TABLE products;`;
-// const createInventory = `CREATE TABLE IF NOT EXISTS inventory (
-//   id INT NOT NULL AUTO_INCREMENT,
-//   product_name VARCHAR(255) NOT NULL,
-//   stock INT NOT NULL,
-//   user_name VARCHAR(255) NOT NULL,
-//   PRIMARY KEY (id)
-// );`;
+
 connection.connect(function (error) {
- 
+
   if (error) {
     throw error;
   } else {

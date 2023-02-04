@@ -45,6 +45,11 @@
                                             required />
                                     </div>
                                     <div class="mb-3 flex flex-col">
+                                        <label>Product Stock</label>
+                                        <input type="number" name="product_stock" placeholder="Enter Number of Stocks Present" class="input input-bordered"
+                                            min="0" required />
+                                    </div>
+                                    <div class="mb-3 flex flex-col">
                                         <label>Product Description</label>
                                         <input type="text" name="product_description"
                                             placeholder="Enter Description of product" class="input input-bordered"
@@ -81,12 +86,15 @@
             const product_quantity = document.querySelector('input[name="product_quantity"]').value;
             const product_description = document.querySelector('input[name="product_description"]').value;
             const product_image = document.querySelector('input[name="product_image"]');
+            const product_stock = document.querySelector('input[name="product_stock"]').value;
+
             var data = new FormData();
             data.append('product_name', product_name);
             data.append('product_price', product_price);
             data.append('product_quantity', product_quantity);
             data.append('product_description', product_description);
             data.append('product_image', product_image.files[0] || 'NULL');
+            data.append('product_stock', product_stock);
 
             console.log(data.get('product_name'))
 
@@ -122,7 +130,7 @@
                     document.querySelector('input[name="product_price"]').value = data.product_price;
                     document.querySelector('input[name="product_quantity"]').value = data.product_quantity;
                     document.querySelector('input[name="product_description"]').value = data.product_description;
-
+                    document.querySelector('input[name="product_stock"]').value = data.stock;
 
                 })
 

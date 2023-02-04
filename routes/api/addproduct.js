@@ -2,9 +2,16 @@ const router = require("express").Router();
 const database = require("../../database");
 const multer = require("multer");
 router.post("/", (req, res) => {
-  const { product_name, product_price, product_description, product_quantity } =
-    req.body;
+  const {
+    product_name,
+    product_price,
+    product_description,
+    product_quantity,
+    product_stock,
+  } = req.body;
   let query;
+  if (product_stock > product_quantity)
+    res.status(400).send("Stock cannot be greater than Product quantity");
   const check = `SELECT * FROM products WHERE product_name = "${product_name}"`;
   database.query(check, (error, result) => {
     if (error) {
@@ -19,22 +26,25 @@ router.post("/", (req, res) => {
   });
 
   if (!req.file) {
-    query = `INSERT INTO products (product_name, product_price, product_quantity, product_description, user_name) VALUES (
+    query = `INSERT INTO products (product_name, product_price, product_quantity, product_description, user_name, stock) VALUES (
       "${product_name}",
       ${Number(product_price)},
       ${Number(product_quantity)},
       "${product_description}",
-      "${req.session.user_name}")`;
+      "${req.session.user_name}",
+       ${Number(product_stock)}
+      )`;
   } else {
     var file = req.file,
       img_name = file.filename;
-    query = `INSERT INTO products (product_name, product_price, product_quantity, product_description, product_image, user_name) VALUES (
+    query = `INSERT INTO products (product_name, product_price, product_quantity, product_description, product_image, user_name, stock) VALUES (
     "${product_name}",
     ${Number(product_price)},
     ${Number(product_quantity)},
     "${product_description}",
     "${img_name}",
-    "${req.session.user_name}")`;
+    "${req.session.user_name}",
+    ${Number(product_stock)})`;
 
     console.log("Uploading file...");
   }
@@ -48,7 +58,7 @@ router.post("/", (req, res) => {
         error: error,
       });
     } else {
-      res.redirect("/addproduct");
+      res.redirect("/");
     }
   });
 });

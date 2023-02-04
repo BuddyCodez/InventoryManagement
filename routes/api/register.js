@@ -9,7 +9,11 @@ router.post("/", function (request, response, next) {
   var user_cmp = request.body.user_cmp;
   var user_phone = request.body.user_phone;
   var user_address = request.body.user_address;
-
+  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (!validRegex.test(user_email_address)) {
+    response.send("Please enter valid email address");
+    response.end();
+  }
   if (user_email_address && user_password) {
     query = `
         INSERT INTO Users (user_email, user_password, user_name, user_cmp, user_phone, user_address)
@@ -24,11 +28,12 @@ router.post("/", function (request, response, next) {
         }
       } else {
         response.send("Error in Registration");
+        console.log(error);
         response.end();
       }
     });
   } else {
-    response.send("Error");
+    response.send("Please enter Username and Password!");
     response.end();
   }
 });

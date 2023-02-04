@@ -4,26 +4,30 @@ router.post("/:id/edit", (req, res) => {
   const product_id = req.params.id;
   console.log(req.body);
   console.log(product_id);
+  if (req.body.product_stock > req.body.product_quantity)
+    res.status(400).send("Stock cannot be greater than Product quantity");
   let query;
   if (req.file) {
-    query = `UPDATE products SET product_name = "${
+    query = `UPDATE products SET product_name = "${String(
       req.body.product_name
-    }", product_price = "${Number(
+    )}", product_price = "${Number(
       req.body.product_price
-    )}", product_description = "${
+    )}", product_description = "${String(
       req.body.product_description
-    }", product_quantity = "${Number(
+    )}", product_quantity = "${Number(
       req.body.product_quantity
-    )}", product_image = "${req.file.filename}"
+    )}", product_image = "${req.file.filename}",
+      stock = "${Number(req.body.product_stock)}"
 WHERE id = ${product_id}`;
   } else {
-    query = `UPDATE products SET product_name = "${
+    query = `UPDATE products SET product_name = "${String(
       req.body.product_name
-    }", product_price = "${Number(
+    )}", product_price = "${Number(
       req.body.product_price
-    )}", product_description = "${
+    )}", product_description = "${String(
       req.body.product_description
-    }", product_quantity = "${Number(req.body.product_quantity)}"
+    )}", product_quantity = "${Number(req.body.product_quantity)}",
+    stock = "${Number(req.body.product_stock)}"
 WHERE id = ${product_id}`;
   }
   if (!product_id) {

@@ -26,7 +26,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(
   session({
-    secret: "webslesson",
+    secret: "secret key is key you dont know",
     resave: true,
     saveUninitialized: false,
     cookie: {
